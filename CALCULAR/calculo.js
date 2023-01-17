@@ -6,10 +6,11 @@ function VERIFICAR_ANO(ano_atual, ano, mes_atual, mes, dia, dia_atual){
     }  else if ((mes_atual == Number(mes.value)+1))  {
         var conta =  ano_atual - Number(ano.value)
         res.innerHTML = `Você tem ${conta} anos`
-    }  else if (mes_atual < Number(mes.value) || (dia_atual <  Number(dia.value) && mes_atual== Number(mes.value)) )  {
-        var conta =  ano_atual - Number(ano.value)-1
+    }  else if (mes_atual+1 < Number(mes.value) || (dia_atual <  Number(dia.value) && mes_atual == Number(mes.value)) )  {
+            var conta =  ano_atual - Number(ano.value)-1
+         
         if (conta ==1 ) {
-            res.innerHTML = `Você tem ${conta+1} ano`
+            res.innerHTML = `Você tem ${conta} ano`
         } else {
             res.innerHTML = `Você tem ${conta} anos`
 
@@ -18,7 +19,8 @@ function VERIFICAR_ANO(ano_atual, ano, mes_atual, mes, dia, dia_atual){
         var conta =  ano_atual - Number(ano.value) 
         res.innerHTML = `Você tem ${conta} anos`
     }
-        return conta
+
+       
 }
 
 function VERIFICAR_MES(mes_atual, mes, dia, dia_atual){
@@ -56,6 +58,9 @@ function VERIFICAR_DIA(dia_atual, dia, mes) {
         var calc = (31-Number(dia.value))+ dia_atual
         if (calc == 32) {
             res.innerHTML += ` e 1 dia`
+        } else if (calc > 32){
+                calc = calc-31
+                res.innerHTML += ` e ${calc} dias`
         } else {
             var calc = (31-Number(dia.value)+ dia_atual)
             res.innerHTML += ` e ${calc} dias`
@@ -71,16 +76,49 @@ function VERIFICAR_DIA(dia_atual, dia, mes) {
 
     }
 }
-
+function VERIFICAR_SEXO(img, tSexo, ano_atual, ano) {
+     conta = ano_atual - Number(ano.value)-1
+    if (tSexo[1].checked) { 
+        
+        if (conta <18 ) {
+        res.innerHTML += "<br>você é crianca/adolescente</br>"
+        img.src = "imagens/menina.png"
+        } else if  (conta >=18 && conta <60) {
+            res.innerHTML += "<br>você é adulta</br>"
+            img.src = "imagens/adulta.png"
+        } else {
+            res.innerHTML += "<br>você é idosa</br>"
+            img.src = "imagens/idosas.png"
+    } 
+    }   else if (tSexo[0].checked) {
+        if (conta < 18 ) {
+            res.innerHTML += "<br>você é crianca/adolescente</br>"
+            img.src = "imagens/menino.png"
+            } else if (conta >=18 && conta <60) {  
+                res.innerHTML += "<br>você é adulto</br>"         
+                img.src = "imagens/adulto.png"
+            } else {
+                res.innerHTML += "<br>você é idoso</br>"
+                img.src = "imagens/idoso.png"
+        }
+    } else {
+            alert("[ERRO] marque uma das opções")
+        }
+    
+}
     
 
 function ANO(){
     var res = document.getElementById("res")
     var agora = new Date()
     res.innerHTML = ""
-    VERIFICAR_ANO(agora.getFullYear(), ano, agora.getMonth(), mes)
+    var img = document.getElementById("imagem")
+    var tSexo = document.getElementsByName("sexo")
+    VERIFICAR_ANO(agora.getFullYear(), ano, agora.getMonth(), mes, dia, agora.getDate())
     VERIFICAR_MES(agora.getMonth(), mes)
     VERIFICAR_DIA(agora.getDate(), dia, mes)
+    VERIFICAR_SEXO(img, tSexo, agora.getFullYear(), ano)     
+    
     
 }
 

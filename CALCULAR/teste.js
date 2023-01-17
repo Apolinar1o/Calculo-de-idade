@@ -1,3 +1,5 @@
 let agora = new Date()
-let dia = agora.getDate()
-console.log(dia)
+let dia = agora.getMonth()
+let Dia = 8
+conta = Dia - dia
+console.log(conta)
