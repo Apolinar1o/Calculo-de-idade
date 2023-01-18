@@ -1,6 +1,6 @@
 body {
     background-color: #4290f7;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Roboto Condensed';
     font-size: 10pt;
 
 } 
@@ -17,23 +17,49 @@ section{
     border-radius: 10px;
     padding-top: 20px;
     padding-left: 20px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.533);
 }
 div {
     margin-top: 20px;
     
+} input#ano, input#dia, input#mes {
+    width: 100px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+} div#numeros {
+    margin: auto;
+    text-align: center;
 }
 div#vSexo, div#botao, div#res {
    text-align: center;
 }
-footer{
-    text-align: center;
-    font-style: italic;
-}
-input {
-    text-align: center;
-}
-img#imagem {
-    margin-left: 30px;
-    margin-bottom: 10px;
+
+input#botao, input#masc, input#fem {
+    background: #434343;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.228);
+	text-shadow: none;
 
 } 
+
+input#botao:hover {
+    background: #016ABC;
+	color: #fff;
+	border: 1px solid #eee;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px #eee;
+	text-shadow: none;
+}
+
+img#imagem {
+    display: block;
+    position: relative;
+    margin: auto;
+} footer{
+    text-align: center;
+    font-style: italic;
+    font-family: 'Explora', cursive;
+}

@@ -1,6 +1,6 @@
 function VERIFICAR_ANO(ano_atual, ano, mes_atual, mes, dia, dia_atual){
 
-    if (ano.value.length == 0 || Number(ano.value)<0 || Number(ano.value) > ano_atual){
+    if (ano.value.length == 0 || Number(ano.value)<0 || Number(ano.value) > ano_atual || (Number(ano.value)>= ano_atual && Number(mes.value) >= mes_atual+1 && Number(dia.value) > dia_atual)){
         alert("[ERRO] Digite o campo do ANO correto porfavor")
         location.reload();
     }  else if ((mes_atual == Number(mes.value)+1))  {
@@ -22,6 +22,8 @@ function VERIFICAR_ANO(ano_atual, ano, mes_atual, mes, dia, dia_atual){
 
        
 }
+
+
 
 function VERIFICAR_MES(mes_atual, mes, dia, dia_atual){
     if (mes.value.length == 0 || Number(mes.value)<1 || Number(mes.value) >12 || mes_atual){
@@ -50,10 +52,14 @@ function VERIFICAR_MES(mes_atual, mes, dia, dia_atual){
     
     return mes_atual, mes, qtd_mes
 }
-function VERIFICAR_DIA(dia_atual, dia, mes) {
+
+
+function VERIFICAR_DIA(dia_atual, dia, mes, mes_atual, ano, ano_atual) {
     if(dia.value.length == 0 || Number(mes.value)<1 || Number(mes.value) >31){
         alert("[ERRO] Digite o campo do DIA correto porfavor")
         location.reload();
+    } else if ( Number(mes.value) == mes_atual+1 && Number(dia.value) == dia_atual) {
+        
     } else if (Number(mes.value) == 1 || Number(mes.value) == 3 || Number(mes.value) == 5 || Number(mes.value) ==7 || Number(mes.value) ==8 || Number(mes.value) == 10 || Number(mes.value) == 12) {
         var calc = (31-Number(dia.value))+ dia_atual
         if (calc == 32) {
@@ -76,6 +82,8 @@ function VERIFICAR_DIA(dia_atual, dia, mes) {
 
     }
 }
+
+
 function VERIFICAR_SEXO(img, tSexo, ano_atual, ano) {
      conta = ano_atual - Number(ano.value)-1
     if (tSexo[1].checked) { 
@@ -90,6 +98,7 @@ function VERIFICAR_SEXO(img, tSexo, ano_atual, ano) {
             res.innerHTML += "<br>você é idosa</br>"
             img.src = "imagens/idosas.png"
     } 
+    // dar erro se for maior que 31 29 30
     }   else if (tSexo[0].checked) {
         if (conta < 18 ) {
             res.innerHTML += "<br>você é crianca/adolescente</br>"
@@ -103,10 +112,13 @@ function VERIFICAR_SEXO(img, tSexo, ano_atual, ano) {
         }
     } else {
             alert("[ERRO] marque uma das opções")
+            location.reload()
         }
     
 }
-    
+function REINICIAR() {
+    location.reload()
+}
 
 function ANO(){
     var res = document.getElementById("res")
@@ -116,8 +128,9 @@ function ANO(){
     var tSexo = document.getElementsByName("sexo")
     VERIFICAR_ANO(agora.getFullYear(), ano, agora.getMonth(), mes, dia, agora.getDate())
     VERIFICAR_MES(agora.getMonth(), mes)
-    VERIFICAR_DIA(agora.getDate(), dia, mes)
-    VERIFICAR_SEXO(img, tSexo, agora.getFullYear(), ano)     
+    VERIFICAR_DIA(agora.getDate(), dia, mes, agora.getMonth(), ano, agora.getFullYear())
+    VERIFICAR_SEXO(img, tSexo, agora.getFullYear(), ano)  
+  
     
     
 }
