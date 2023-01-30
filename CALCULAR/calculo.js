@@ -6,7 +6,7 @@ function VERIFICAR_ANO(ano_atual, ano, mes_atual, mes, dia, dia_atual){
     }  else if ((mes_atual == Number(mes.value)+1))  {
         var conta =  ano_atual - Number(ano.value)
         res.innerHTML = `Você tem ${conta} anos`
-    }  else if (mes_atual+1 < Number(mes.value) || (dia_atual <  Number(dia.value) && mes_atual == Number(mes.value)) )  {
+    }  else if (mes_atual+1 < Number(mes.value) || (dia_atual <  Number(dia.value) && mes_atual+1 == Number(mes.value)) )  {
             var conta =  ano_atual - Number(ano.value)-1
          
         if (conta ==1 ) {
@@ -31,9 +31,12 @@ function VERIFICAR_MES(mes_atual, mes, dia, dia_atual){
         location.reload();
     } else if (mes_atual -Number(mes.value)+1 < 0) {
         qtd_mes = 12-Number(mes.value)+1
-        if (qtd_mes ==12 && dia >dia_atual && mes == mes_atual) {
+        if (mes_atual+1 == Number(mes.value) && dia_atual < Number(dia.value)) { 
+            qtd_mes = 12-Number(mes.value)
+            res.innerHTML += (`, ${qtd_mes} meses` )
+        } else if (qtd_mes ==12 && dia >dia_atual && mes == mes_atual) {
             res.innerHTML += (`` )
-        } else if (Number(dia.value) < dia_atual) {
+        } else if (Number(dia.value) < dia_atual+1) {
             res.innerHTML += (`, ${qtd_mes} meses` )
          
 
@@ -43,10 +46,15 @@ function VERIFICAR_MES(mes_atual, mes, dia, dia_atual){
         }
      
     } else {
-        qtd_mes = mes_atual - Number(mes.value) 
-        if (qtd_mes ==0) {
+        qtd_mes = (mes_atual+1) - Number(mes.value) 
+        if (mes_atual+1 == Number(mes.value) && dia_atual < Number(dia.value)) { 
+            qtd_mes = 12-Number(mes.value)
+            res.innerHTML += (`, ${qtd_mes} meses` )
+        }else if (mes_atual+1 == Number(mes.value) && dia_atual == Number(dia.value)) { 
             res.innerHTML += (``)
-        } else
+        }else if (qtd_mes ==0) {
+            res.innerHTML += (``)
+        } else { 
         qtd_mes = qtd_mes-1
         if (qtd_mes ==0) {
             res.innerHTML += (``)
@@ -55,7 +63,7 @@ function VERIFICAR_MES(mes_atual, mes, dia, dia_atual){
            
         }
  
-
+    }
     }
         
     
@@ -73,10 +81,15 @@ function VERIFICAR_DIA(dia_atual, dia, mes, mes_atual, ano, ano_atual) {
         var calc = (31-Number(dia.value))+ dia_atual
         if (calc == 32) {
             res.innerHTML += ` e 1 dia`
+        } else if(dia >dia_atual && mes == mes_atual+1 ) { 
+                calc = 31-(31-30)
+                res.innerHTML += ` e ${calc} dias`
         } else if (calc > 32){
                 calc = calc-31
                 res.innerHTML += ` e ${calc} dias`
-        } else {
+        } else if (calc == 31){
+            res.innerHTML += ``
+        }else {
             var calc = (31-Number(dia.value)+ dia_atual)
             res.innerHTML += ` e ${calc} dias`
         }
@@ -87,7 +100,9 @@ function VERIFICAR_DIA(dia_atual, dia, mes, mes_atual, ano, ano_atual) {
         } else if (calc > 32){
                 calc = calc-31
                 res.innerHTML += ` e ${calc} dias`
-        } else {
+        } else if (calc == 30){
+            res.innerHTML += ``
+        }else {
             var calc = (31-Number(dia.value)+ dia_atual)
             res.innerHTML += ` e ${calc} dias`
         }
@@ -99,6 +114,8 @@ function VERIFICAR_DIA(dia_atual, dia, mes, mes_atual, ano, ano_atual) {
         } else if (calc > 32){
                 calc = calc-31
                 res.innerHTML += ` e ${calc} dias`
+        } else if (calc == 28){
+            res.innerHTML += ``
         } else {
             var calc = (31-Number(dia.value)+ dia_atual)
             res.innerHTML += ` e ${calc} dias`
